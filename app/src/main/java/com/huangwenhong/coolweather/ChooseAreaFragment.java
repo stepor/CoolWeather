@@ -170,7 +170,7 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
             listView.setSelection(0);
             currentLevel = LEVEL_COUNTRY;
         } else {
-            String address = "http://guolin.tech/api/china" + selectedProvince.getProvinceCode() +
+            String address = "http://guolin.tech/api/china/" + selectedProvince.getProvinceCode() +
                     "/" + selectedCity.getCityCode();
             queryFromServer(address, COUNTRY);
         }
