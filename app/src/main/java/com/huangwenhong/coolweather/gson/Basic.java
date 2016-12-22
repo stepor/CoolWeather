@@ -13,7 +13,7 @@ public class Basic {
     @SerializedName("id")
     public String weatherId;
 
-    Update update;
+    public Update update;
 
     public class Update {
         @SerializedName("loc")

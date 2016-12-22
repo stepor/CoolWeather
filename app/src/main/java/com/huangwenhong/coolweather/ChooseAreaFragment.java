@@ -2,10 +2,13 @@ package com.huangwenhong.coolweather;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.LoginFilter;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +40,7 @@ import okhttp3.Response;
  */
 
 public class ChooseAreaFragment extends android.support.v4.app.Fragment {
+    private static final String TAG = "ChooseAreaFragment";
     public static final int LEVEL_PROVINCE = 0;
     public static final int LEVEL_CITY = 1;
     public static final int LEVEL_COUNTRY = 2;
@@ -95,11 +99,20 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 if(currentLevel == LEVEL_PROVINCE) {
+                    Log.i(TAG, "onItemClick: current level: province");
                     selectedProvince = provinceList.get(position);
                     queryCities();
                 } else if(currentLevel == LEVEL_CITY) {
+                    Log.i(TAG, "onItemClick: current level: city");
                     selectedCity = cityList.get(position);
                     queryCountries();
+                } else if(currentLevel == LEVEL_COUNTRY) {
+                    String weatherId = countryList.get(position).getWeatherId();
+                    Log.i(TAG, "onItemClick: weatherId: " + weatherId );
+                    Intent intent= new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id", weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });

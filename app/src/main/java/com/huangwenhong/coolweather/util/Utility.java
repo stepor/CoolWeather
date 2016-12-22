@@ -1,6 +1,7 @@
 package com.huangwenhong.coolweather.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.Excluder;
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 public class Utility {
 
     //解析和处理服务器返回的省级数据
+    private static final String TAG = "Utility";
     public static boolean handleProvinceResponse(String response) {
         if(!TextUtils.isEmpty(response)) {
             try{
@@ -85,8 +87,12 @@ public class Utility {
     public static Weather handleWeatherResponse(String response) {
         try {
             JSONObject jsonObject = new JSONObject(response);
+            Log.i(TAG, "handleWeatherResponse: jsonObject:" + jsonObject.toString());
+            Log.i(TAG, "handleWeatherResponse: -------------------------");
             JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
-            String weatherContent = jsonArray.getJSONArray(0).toString();
+            Log.i(TAG, "handleWeatherResponse: ================");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            Log.i(TAG, "handleWeatherResponse:weatherContent: " + weatherContent);
             return new Gson().fromJson(weatherContent, Weather.class);
         } catch (Exception e) {
             e.printStackTrace();
