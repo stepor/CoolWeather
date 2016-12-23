@@ -1,5 +1,6 @@
 package com.huangwenhong.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.huangwenhong.coolweather.gson.Forecast;
 import com.huangwenhong.coolweather.gson.Weather;
+import com.huangwenhong.coolweather.service.AutoUpdateService;
 import com.huangwenhong.coolweather.util.HttpUtil;
 import com.huangwenhong.coolweather.util.Utility;
 
@@ -201,6 +203,9 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        //启动自动更新服务
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     private void loadBingPic() {
