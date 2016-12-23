@@ -86,7 +86,7 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
         titleTextView = (TextView)view.findViewById(R.id.titleTextView);
         listView = (ListView)view.findViewById(R.id.listView);
         dataList = new ArrayList<>();
-        adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, dataList);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, dataList);
         listView.setAdapter(adapter);
         return view;
 
@@ -108,11 +108,18 @@ public class ChooseAreaFragment extends android.support.v4.app.Fragment {
                     queryCountries();
                 } else if(currentLevel == LEVEL_COUNTRY) {
                     String weatherId = countryList.get(position).getWeatherId();
-                    Log.i(TAG, "onItemClick: weatherId: " + weatherId );
-                    Intent intent= new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra("weather_id", weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if(getActivity() instanceof MainActivity) {
+                        Log.i(TAG, "onItemClick: weatherId: " + weatherId);
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    } else {
+                        WeatherActivity activity = (WeatherActivity)getActivity();
+                        activity.drawerLayout.closeDrawers();
+                        activity.swipeRefresh.setRefreshing(true);
+                        activity.requestWeather(weatherId);
+                    }
                 }
             }
         });
