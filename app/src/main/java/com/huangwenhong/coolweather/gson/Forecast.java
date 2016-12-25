@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName;
 public class Forecast {
     public String date;
 
+    @SerializedName("hum")
+    public String humidity;//相对湿度
+
     @SerializedName("tmp")
     public Temperature temperature;
 

@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Now {
+    @SerializedName("hum")
+    public String humidity;//相对湿度
+
     @SerializedName("tmp")
     public String temperature;
 

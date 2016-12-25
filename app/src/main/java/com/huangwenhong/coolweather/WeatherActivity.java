@@ -49,7 +49,7 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
     private TextView degreeText;
     private TextView weatherInfotext;
     private LinearLayout forecastLayout;
-    private TextView aqiText;
+    private TextView humText;
     private TextView pm25Text;
     private TextView comfortText;
     private TextView carWashText;
@@ -78,7 +78,7 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
         degreeText = (TextView)findViewById(R.id.degree_text);
         weatherInfotext = (TextView)findViewById(R.id.weather_info_text);
         forecastLayout = (LinearLayout)findViewById(R.id.forecast_layout);
-        aqiText = (TextView)findViewById(R.id.aqi_text);
+        humText = (TextView)findViewById(R.id.hum_text);
         pm25Text = (TextView)findViewById(R.id.pm25_text);
         comfortText = (TextView)findViewById(R.id.comfort_text);
         carWashText = (TextView)findViewById(R.id.car_wash_text);
@@ -191,7 +191,7 @@ public class WeatherActivity extends AppCompatActivity implements ChooseAreaFrag
         }
 
         if(weather.aqi != null) {
-            aqiText.setText(weather.aqi.city.aqi);
+            humText.setText(weather.now.humidity);
             pm25Text.setText(weather.aqi.city.pm25);
         }
 
